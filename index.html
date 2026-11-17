@@ -237,6 +237,45 @@
   .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
   .tags span { font-size: 0.85rem; background: var(--bg); border: 1px solid var(--rule); padding: 0.15rem 0.55rem; border-radius: 6px; }
 
+  /* LeetCode stats card */
+  .lc { display: grid; grid-template-columns: 1fr 1.25fr; gap: 1.1rem; }
+  .lc > * { min-width: 0; }
+  .lc-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 1.4rem 1.5rem; box-shadow: var(--shadow); }
+  .lc-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+  .lc-head h3 { font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 0.45rem; }
+  .lc-head h3 svg.i { color: var(--accent); }
+  .lc-user { color: var(--muted); font-size: 0.88rem; }
+  .lc-body { display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: center; }
+  .ring { position: relative; width: 150px; height: 150px; }
+  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring circle { fill: none; stroke-width: 10; stroke-linecap: butt; }
+  .ring .bg { stroke: var(--bg); }
+  .ring .seg { transition: stroke-dasharray 1s cubic-bezier(.2,.7,.2,1), stroke-dashoffset 1s cubic-bezier(.2,.7,.2,1); }
+  .ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .ring-center b { font-family: "Bricolage Grotesque", sans-serif; font-size: 2rem; line-height: 1; font-variant-numeric: tabular-nums; }
+  .ring-center small { color: var(--muted); font-size: 0.82rem; margin-top: 0.25rem; }
+  .ring-center .ok { display: inline-flex; align-items: center; gap: 0.25rem; color: var(--result); font-size: 0.8rem; font-weight: 600; margin-top: 0.3rem; }
+  .diff { display: grid; gap: 0.6rem; }
+  .diff-row { background: var(--bg); border-radius: 10px; padding: 0.55rem 0.8rem; }
+  .diff-top { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.35rem; }
+  .diff-top span:last-child { font-variant-numeric: tabular-nums; color: var(--ink); }
+  .diff-top small { color: var(--muted); font-weight: 500; }
+  .diff-track { height: 6px; background: #e4e8ef; border-radius: 99px; overflow: hidden; }
+  .diff-fill { height: 100%; width: 0; border-radius: 99px; transition: width 1s cubic-bezier(.2,.7,.2,1); }
+  .easy { color: #12866f; } .medium { color: #b7791f; } .hard { color: #c2492f; }
+  .bg-easy { background: #1aa385; } .bg-medium { background: #e0a030; } .bg-hard { background: #d9573c; }
+  .lc-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.1rem; }
+  .heat-wrap { overflow-x: auto; }
+  .heat { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 15px); gap: 3px; width: max-content; }
+  .heat i { width: 15px; height: 15px; border-radius: 2px; background: #e8ecf2; }
+  .heat i.l1 { background: #b8e6d8; } .heat i.l2 { background: #6cc9ae; } .heat i.l3 { background: #1aa385; } .heat i.l4 { background: #0f6f5a; }
+  .heat-legend { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.82rem; margin-top: 0.6rem; flex-wrap: wrap; gap: 0.5rem; }
+  .lc-note { color: var(--muted); font-size: 0.85rem; margin-top: 0.9rem; min-height: 1.2em; }
+  .skel { color: transparent !important; background: linear-gradient(90deg, #eef1f5, #f7f9fb, #eef1f5); background-size: 200% 100%; border-radius: 6px; }
+  @media (prefers-reduced-motion: no-preference) { .skel { animation: shimmer 1.2s linear infinite; } @keyframes shimmer { to { background-position: -200% 0; } } }
+  @media (max-width: 900px) { .lc { grid-template-columns: 1fr; } }
+  @media (max-width: 420px) { .lc-body { grid-template-columns: 1fr; justify-items: center; } .diff { width: 100%; } .lc-stats { grid-template-columns: 1fr 1fr; } .lc-head { flex-wrap: wrap; } }
+
   /* Contact */
   .contact-card { background: var(--ink); color: #fff; border-radius: 18px; padding: clamp(1.75rem, 5vw, 3rem); display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: center; }
   .contact-card h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; }
@@ -311,6 +350,8 @@
   <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13 7 22l5-3 5 3-1.5-9"/></symbol>
   <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
   <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6M12 19h8"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 22c4 0 7-3 7-7 0-4-3-6-4-9-1 2-2 3-4 3 0-2-1-4-3-6-1 4-4 7-4 12 0 4 3 7 8 7z"/></symbol>
   <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
 </svg>
 
@@ -321,6 +362,7 @@
     <ul id="navList">
       <li><a href="#work">Work</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#leetcode">LeetCode</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -509,6 +551,60 @@
         </ul>
       </li>
     </ol>
+  </section>
+
+  <section id="leetcode">
+    <div class="s-head">
+      <div>
+        <h2><svg class="i"><use href="#i-terminal"/></svg>Problem solving</h2>
+        <p>Stats from LeetCode, refreshed automatically every few hours.</p>
+      </div>
+      <a class="btn" href="https://leetcode.com/u/sravanikoshtu/" target="_blank" rel="noopener"><svg class="i"><use href="#i-ext"/></svg>View LeetCode profile</a>
+    </div>
+
+    <div class="lc">
+      <div class="lc-card">
+        <div class="lc-head">
+          <h3><svg class="i"><use href="#i-target"/></svg>Solved problems</h3>
+          <span class="lc-user">@sravanikoshtu</span>
+        </div>
+        <div class="lc-body">
+          <div class="ring">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="bg" cx="60" cy="60" r="50"/>
+              <circle class="seg" id="segEasy" cx="60" cy="60" r="50" stroke="#1aa385" stroke-dasharray="0 400"/>
+              <circle class="seg" id="segMedium" cx="60" cy="60" r="50" stroke="#e0a030" stroke-dasharray="0 400"/>
+              <circle class="seg" id="segHard" cx="60" cy="60" r="50" stroke="#d9573c" stroke-dasharray="0 400"/>
+            </svg>
+            <div class="ring-center">
+              <b id="lcSolved" class="skel">000</b>
+              <small id="lcTotal">solved</small>
+              <span class="ok" id="lcAcc" hidden></span>
+            </div>
+          </div>
+          <div class="diff">
+            <div class="diff-row"><div class="diff-top"><span class="easy">Easy</span><span id="lcEasy" class="skel">00/000</span></div><div class="diff-track"><div class="diff-fill bg-easy" id="barEasy"></div></div></div>
+            <div class="diff-row"><div class="diff-top"><span class="medium">Medium</span><span id="lcMedium" class="skel">00/000</span></div><div class="diff-track"><div class="diff-fill bg-medium" id="barMedium"></div></div></div>
+            <div class="diff-row"><div class="diff-top"><span class="hard">Hard</span><span id="lcHard" class="skel">00/000</span></div><div class="diff-track"><div class="diff-fill bg-hard" id="barHard"></div></div></div>
+          </div>
+        </div>
+        <p class="lc-note" id="lcNote">Loading live stats</p>
+      </div>
+
+      <div class="lc-card">
+        <div class="lc-head">
+          <h3><svg class="i"><use href="#i-flame"/></svg>Activity</h3>
+          <span class="lc-user" id="lcSubs"></span>
+        </div>
+        <div class="lc-stats">
+          <div class="stat"><b id="lcRank" class="skel">000000</b><span>Global ranking</span></div>
+          <div class="stat"><b id="lcActive" class="skel">00</b><span>Active days</span></div>
+          <div class="stat"><b id="lcStreak" class="skel">00</b><span>Max streak</span></div>
+        </div>
+        <div class="heat-wrap"><div class="heat" id="lcHeat" aria-label="Submission activity over the last 26 weeks"></div></div>
+        <div class="heat-legend"><span>Last 26 weeks</span><span style="display:inline-flex;gap:3px;align-items:center">Less <i style="width:11px;height:11px;border-radius:2px;background:#e8ecf2;display:inline-block"></i><i style="width:11px;height:11px;border-radius:2px;background:#b8e6d8;display:inline-block"></i><i style="width:11px;height:11px;border-radius:2px;background:#6cc9ae;display:inline-block"></i><i style="width:11px;height:11px;border-radius:2px;background:#1aa385;display:inline-block"></i><i style="width:11px;height:11px;border-radius:2px;background:#0f6f5a;display:inline-block"></i> More</span></div>
+      </div>
+    </div>
   </section>
 
   <section id="research">
@@ -703,6 +799,105 @@
     }, { rootMargin: "-45% 0px -50% 0px" });
     document.querySelectorAll("section[id]").forEach(function (s) { spy.observe(s); });
   }
+
+  /* LeetCode stats configuration */
+  var LC_USER = "sravanikoshtu";
+  var LC_API = "https://alfa-leetcode-api.onrender.com";
+
+  function lcSet(id, text) { var el = document.getElementById(id); el.textContent = text; el.classList.remove("skel"); }
+
+  function lcRender(d, fromCache, updatedAt) {
+    var total = d.totalQuestions || 0;
+    lcSet("lcSolved", d.totalSolved);
+    document.getElementById("lcTotal").textContent = total ? "of " + total + " solved" : "solved";
+    lcSet("lcEasy", d.easySolved + (d.totalEasy ? "/" + d.totalEasy : ""));
+    lcSet("lcMedium", d.mediumSolved + (d.totalMedium ? "/" + d.totalMedium : ""));
+    lcSet("lcHard", d.hardSolved + (d.totalHard ? "/" + d.totalHard : ""));
+    lcSet("lcRank", d.ranking ? Number(d.ranking).toLocaleString("en-US") : "N/A");
+    if (d.acceptanceRate) {
+      var acc = document.getElementById("lcAcc");
+      acc.textContent = d.acceptanceRate + "% acceptance";
+      acc.hidden = false;
+    }
+
+    /* Difficulty bars and ring segments, sized against problem totals when available */
+    requestAnimationFrame(function () {
+      [["Easy", d.easySolved, d.totalEasy], ["Medium", d.mediumSolved, d.totalMedium], ["Hard", d.hardSolved, d.totalHard]].forEach(function (r) {
+        var pct = r[2] ? (r[1] / r[2]) * 100 : (d.totalSolved ? (r[1] / d.totalSolved) * 100 : 0);
+        document.getElementById("bar" + r[0]).style.width = Math.min(pct, 100) + "%";
+      });
+      var C = 2 * Math.PI * 50, base = total || d.totalSolved || 1, offset = 0;
+      [["segEasy", d.easySolved], ["segMedium", d.mediumSolved], ["segHard", d.hardSolved]].forEach(function (seg) {
+        var len = (seg[1] / base) * C;
+        var el = document.getElementById(seg[0]);
+        el.setAttribute("stroke-dasharray", len + " " + C);
+        el.setAttribute("stroke-dashoffset", -offset);
+        offset += len;
+      });
+    });
+
+    lcHeatmap(d.submissionCalendar);
+    var note = "Live from LeetCode";
+    if (updatedAt) {
+      var dt = new Date(updatedAt);
+      if (!isNaN(dt)) { note = "Updated from LeetCode on " + dt.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }); }
+    }
+    document.getElementById("lcNote").textContent = note;
+  }
+
+  /* Builds a 26 week activity grid from the submission calendar (unix seconds mapped to counts) */
+  function lcHeatmap(cal) {
+    var heat = document.getElementById("lcHeat");
+    if (typeof cal === "string") { try { cal = JSON.parse(cal); } catch (e) { cal = null; } }
+    cal = cal || {};
+    var byDay = {}, totalSubs = 0;
+    Object.keys(cal).forEach(function (ts) {
+      var day = new Date(Number(ts) * 1000).toISOString().slice(0, 10);
+      byDay[day] = (byDay[day] || 0) + cal[ts];
+    });
+    var today = new Date(); today.setUTCHours(0, 0, 0, 0);
+    var start = new Date(today); start.setUTCDate(start.getUTCDate() - (25 * 7 + today.getUTCDay()));
+    var html = "", active = 0, streak = 0, best = 0;
+    for (var t = new Date(start); t <= today; t.setUTCDate(t.getUTCDate() + 1)) {
+      var key = t.toISOString().slice(0, 10), n = byDay[key] || 0;
+      totalSubs += n;
+      if (n > 0) { active++; streak++; best = Math.max(best, streak); } else { streak = 0; }
+      var lvl = n === 0 ? "" : n < 2 ? "l1" : n < 4 ? "l2" : n < 8 ? "l3" : "l4";
+      html += '<i class="' + lvl + '" title="' + key + ": " + n + ' submissions"></i>';
+    }
+    heat.innerHTML = html;
+    lcSet("lcActive", active);
+    lcSet("lcStreak", best);
+    document.getElementById("lcSubs").textContent = totalSubs + " submissions in 26 weeks";
+  }
+
+  function lcFail() {
+    ["lcSolved", "lcEasy", "lcMedium", "lcHard", "lcRank", "lcActive", "lcStreak"].forEach(function (id) { lcSet(id, "N/A"); });
+    lcHeatmap(null);
+    document.getElementById("lcSubs").textContent = "";
+    document.getElementById("lcNote").innerHTML = 'Live stats are unavailable right now. <a href="https://leetcode.com/u/' + LC_USER + '/" target="_blank" rel="noopener">See the full profile on LeetCode</a>.';
+  }
+
+  /* Loads stats from leetcode.json (refreshed by a GitHub Action), then falls back to the public API */
+  function lcFetchJson(url, ms) {
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) { ctrl.abort(); } }, ms);
+    return fetch(url, ctrl ? { signal: ctrl.signal, cache: "no-store" } : { cache: "no-store" })
+      .then(function (r) { clearTimeout(timer); if (!r.ok) { throw new Error("HTTP " + r.status); } return r.json(); })
+      .then(function (d) { if (d == null || d.totalSolved == null) { throw new Error("Unexpected response"); } return d; },
+            function (e) { clearTimeout(timer); throw e; });
+  }
+
+  function lcLoad() {
+    lcFetchJson("leetcode.json", 10000)
+      .then(function (d) { lcRender(d, false, d.updatedAt); })
+      .catch(function () {
+        return lcFetchJson(LC_API + "/userProfile/" + LC_USER, 30000)
+          .then(function (d) { lcRender(d, false); })
+          .catch(lcFail);
+      });
+  }
+  lcLoad();
 </script>
 </body>
 </html>
