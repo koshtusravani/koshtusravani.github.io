@@ -276,6 +276,24 @@
   @media (max-width: 900px) { .lc { grid-template-columns: 1fr; } }
   @media (max-width: 420px) { .lc-body { grid-template-columns: 1fr; justify-items: center; } .diff { width: 100%; } .lc-stats { grid-template-columns: 1fr 1fr; } .lc-head { flex-wrap: wrap; } }
 
+  /* GitHub stats card */
+  .gh { display: grid; grid-template-columns: 1fr 1.25fr; gap: 1.1rem; }
+  .gh > * { min-width: 0; }
+  .gh-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+  .lang-bar { display: flex; height: 10px; border-radius: 99px; overflow: hidden; background: var(--bg); margin: 1.3rem 0 0.8rem; }
+  .lang-bar span { height: 100%; width: 0; transition: width 1s cubic-bezier(.2,.7,.2,1); }
+  .lang-list { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; margin: 0; padding: 0; list-style: none; font-size: 0.88rem; }
+  .lang-list li { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .lang-list i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .lang-list b { font-weight: 600; }
+  .lang-list small { color: var(--muted); }
+  .gh-heat i { width: 15px; height: 15px; border-radius: 2px; background: #e8ecf2; }
+  .gh-heat i.g1 { background: #c7cdf6; } .gh-heat i.g2 { background: #8f9cec; } .gh-heat i.g3 { background: #5566dd; } .gh-heat i.g4 { background: #2a37a8; }
+  .legend-sq { display: inline-flex; gap: 3px; align-items: center; }
+  .legend-sq i { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+  @media (max-width: 900px) { .gh { grid-template-columns: 1fr; } }
+  @media (max-width: 420px) { .gh-stats { grid-template-columns: 1fr 1fr; } }
+
   /* Contact */
   .contact-card { background: var(--ink); color: #fff; border-radius: 18px; padding: clamp(1.75rem, 5vw, 3rem); display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: center; }
   .contact-card h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; }
@@ -363,6 +381,7 @@
       <li><a href="#work">Work</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#leetcode">LeetCode</a></li>
+      <li><a href="#github">GitHub</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -603,6 +622,50 @@
         </div>
         <div class="heat-wrap"><div class="heat" id="lcHeat" aria-label="Submission activity over the last 26 weeks"></div></div>
         <div class="heat-legend"><span>Last 26 weeks</span><span style="display:inline-flex;gap:3px;align-items:center">Less <i style="width:11px;height:11px;border-radius:2px;background:#e8ecf2;display:inline-block"></i><i style="width:11px;height:11px;border-radius:2px;background:#b8e6d8;display:inline-block"></i><i style="width:11px;height:11px;border-radius:2px;background:#6cc9ae;display:inline-block"></i><i style="width:11px;height:11px;border-radius:2px;background:#1aa385;display:inline-block"></i><i style="width:11px;height:11px;border-radius:2px;background:#0f6f5a;display:inline-block"></i> More</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="github">
+    <div class="s-head">
+      <div>
+        <h2><svg class="i"><use href="#i-code"/></svg>GitHub activity</h2>
+        <p>Stats from GitHub, refreshed automatically every few hours.</p>
+      </div>
+      <a class="btn" href="https://github.com/koshtusravani" target="_blank" rel="noopener"><svg class="i"><use href="#i-ext"/></svg>View GitHub profile</a>
+    </div>
+
+    <div class="gh">
+      <div class="lc-card">
+        <div class="lc-head">
+          <h3><svg class="i"><use href="#i-chart"/></svg>Overview</h3>
+          <span class="lc-user">@koshtusravani</span>
+        </div>
+        <div class="gh-stats">
+          <div class="stat"><b id="ghContrib" class="skel">000</b><span>Contributions, last year</span></div>
+          <div class="stat"><b id="ghCommits" class="skel">000</b><span>Commits, last year</span></div>
+          <div class="stat"><b id="ghRepos" class="skel">00</b><span>Public repositories</span></div>
+          <div class="stat"><b id="ghPRs" class="skel">00</b><span>Pull requests</span></div>
+          <div class="stat"><b id="ghStars" class="skel">00</b><span>Stars earned</span></div>
+          <div class="stat"><b id="ghFollowers" class="skel">00</b><span>Followers</span></div>
+        </div>
+        <div class="lang-bar" id="ghLangBar" aria-hidden="true"></div>
+        <ul class="lang-list" id="ghLangList" aria-label="Top languages"></ul>
+        <p class="lc-note" id="ghNote">Loading GitHub stats</p>
+      </div>
+
+      <div class="lc-card">
+        <div class="lc-head">
+          <h3><svg class="i"><use href="#i-flame"/></svg>Contributions</h3>
+          <span class="lc-user" id="ghRecent"></span>
+        </div>
+        <div class="lc-stats">
+          <div class="stat"><b id="ghCur" class="skel">00</b><span>Current streak</span></div>
+          <div class="stat"><b id="ghLong" class="skel">00</b><span>Longest streak</span></div>
+          <div class="stat"><b id="ghDays" class="skel">00</b><span>Active days</span></div>
+        </div>
+        <div class="heat-wrap"><div class="heat gh-heat" id="ghHeat" aria-label="GitHub contributions over the last 26 weeks"></div></div>
+        <div class="heat-legend"><span>Last 26 weeks</span><span class="legend-sq">Less <i style="background:#e8ecf2"></i><i style="background:#c7cdf6"></i><i style="background:#8f9cec"></i><i style="background:#5566dd"></i><i style="background:#2a37a8"></i> More</span></div>
       </div>
     </div>
   </section>
@@ -898,6 +961,103 @@
       });
   }
   lcLoad();
+
+  /* GitHub stats: reads github.json (refreshed by a GitHub Action), then falls back to the public REST API */
+  var GH_USER = "koshtusravani";
+
+  function ghSet(id, value) { lcSet(id, value == null ? "N/A" : Number(value).toLocaleString("en-US")); }
+
+  function ghLanguages(langs) {
+    var bar = document.getElementById("ghLangBar"), list = document.getElementById("ghLangList");
+    if (!langs || !langs.length) { bar.hidden = true; list.innerHTML = ""; return; }
+    bar.innerHTML = langs.map(function (l) { return '<span style="background:' + l.color + '" data-w="' + l.percent + '"></span>'; }).join("");
+    list.innerHTML = langs.map(function (l) {
+      return '<li><i style="background:' + l.color + '"></i><b>' + l.name + '</b><small>' + l.percent + '%</small></li>';
+    }).join("");
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        bar.querySelectorAll("span").forEach(function (s) { s.style.width = s.getAttribute("data-w") + "%"; });
+      });
+    });
+  }
+
+  /* Builds a 26 week contribution grid from a date to count map */
+  function ghHeatmap(calendar) {
+    var heat = document.getElementById("ghHeat");
+    calendar = calendar || {};
+    var today = new Date(); today.setUTCHours(0, 0, 0, 0);
+    var start = new Date(today); start.setUTCDate(start.getUTCDate() - (25 * 7 + today.getUTCDay()));
+    var html = "", active = 0, total = 0;
+    for (var t = new Date(start); t <= today; t.setUTCDate(t.getUTCDate() + 1)) {
+      var key = t.toISOString().slice(0, 10), n = calendar[key] || 0;
+      total += n;
+      if (n > 0) { active++; }
+      var lvl = n === 0 ? "" : n < 2 ? "g1" : n < 4 ? "g2" : n < 8 ? "g3" : "g4";
+      html += '<i class="' + lvl + '" title="' + key + ": " + n + ' contributions"></i>';
+    }
+    heat.innerHTML = html;
+    lcSet("ghDays", active);
+    document.getElementById("ghRecent").textContent = total + " contributions in 26 weeks";
+  }
+
+  function ghRender(d) {
+    ghSet("ghContrib", d.contributionsLastYear);
+    ghSet("ghCommits", d.commits);
+    ghSet("ghRepos", d.publicRepos);
+    ghSet("ghPRs", d.pullRequests);
+    ghSet("ghStars", d.totalStars);
+    ghSet("ghFollowers", d.followers);
+    lcSet("ghCur", (d.currentStreak || 0) + (d.currentStreak === 1 ? " day" : " days"));
+    lcSet("ghLong", (d.longestStreak || 0) + (d.longestStreak === 1 ? " day" : " days"));
+    ghLanguages(d.languages);
+    ghHeatmap(d.calendar);
+    var note = "Live from GitHub";
+    var dt = new Date(d.updatedAt);
+    if (d.updatedAt && !isNaN(dt)) { note = "Updated from GitHub on " + dt.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }); }
+    document.getElementById("ghNote").textContent = note;
+  }
+
+  /* Fallback without github.json: profile and repository data from the public REST API, no contribution calendar */
+  function ghFallback() {
+    return Promise.all([
+      lcFetchRaw("https://api.github.com/users/" + GH_USER, 10000),
+      lcFetchRaw("https://api.github.com/users/" + GH_USER + "/repos?per_page=100&type=owner", 10000)
+    ]).then(function (res) {
+      var user = res[0], repos = res[1].filter(function (r) { return !r.fork; });
+      var counts = {};
+      repos.forEach(function (r) { if (r.language) { counts[r.language] = (counts[r.language] || 0) + 1; } });
+      var palette = ["#3346d3", "#17806b", "#e0a030", "#c2492f", "#7c5cd6", "#5a6478"];
+      var names = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; }).slice(0, 6);
+      var sum = names.reduce(function (s, n) { return s + counts[n]; }, 0) || 1;
+      ghSet("ghRepos", user.public_repos);
+      ghSet("ghFollowers", user.followers);
+      ghSet("ghStars", repos.reduce(function (s, r) { return s + r.stargazers_count; }, 0));
+      ["ghContrib", "ghCommits", "ghPRs", "ghCur", "ghLong"].forEach(function (id) { lcSet(id, "N/A"); });
+      ghLanguages(names.map(function (n, i) { return { name: n, color: palette[i], percent: Math.round(counts[n] / sum * 1000) / 10 }; }));
+      ghHeatmap(null);
+      document.getElementById("ghNote").textContent = "Contribution history appears after the stats workflow runs.";
+    });
+  }
+
+  function lcFetchRaw(url, ms) {
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) { ctrl.abort(); } }, ms);
+    return fetch(url, ctrl ? { signal: ctrl.signal } : {})
+      .then(function (r) { clearTimeout(timer); if (!r.ok) { throw new Error("HTTP " + r.status); } return r.json(); },
+            function (e) { clearTimeout(timer); throw e; });
+  }
+
+  function ghFail() {
+    ["ghContrib", "ghCommits", "ghRepos", "ghPRs", "ghStars", "ghFollowers", "ghCur", "ghLong"].forEach(function (id) { lcSet(id, "N/A"); });
+    ghLanguages(null);
+    ghHeatmap(null);
+    document.getElementById("ghNote").innerHTML = 'GitHub stats are unavailable right now. <a href="https://github.com/' + GH_USER + '" target="_blank" rel="noopener">See the full profile on GitHub</a>.';
+  }
+
+  fetch("github.json", { cache: "no-store" })
+    .then(function (r) { if (!r.ok) { throw new Error("HTTP " + r.status); } return r.json(); })
+    .then(function (d) { if (!d || d.publicRepos == null) { throw new Error("Unexpected response"); } ghRender(d); })
+    .catch(function () { ghFallback().catch(ghFail); });
 </script>
 </body>
 </html>
