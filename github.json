@@ -15,17 +15,17 @@
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 54.4
+      "percent": 51.5
     },
     {
       "name": "Jupyter Notebook",
       "color": "#DA5B0B",
-      "percent": 41.8
+      "percent": 39.6
     },
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 2.8
+      "percent": 7.9
     },
     {
       "name": "JavaScript",
@@ -410,7 +410,8 @@
     "2026-11-14": 0,
     "2026-11-15": 0,
     "2026-11-16": 1,
-    "2026-11-17": 5
+    "2026-11-17": 5,
+    "2026-11-18": 0
   },
-  "updatedAt": "2026-11-17T22:51:22+00:00"
+  "updatedAt": "2026-11-18T07:33:14+00:00"
 }
