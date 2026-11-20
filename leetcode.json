@@ -8,7 +8,7 @@
   "totalMedium": 2148,
   "hardSolved": 47,
   "totalHard": 991,
-  "ranking": 634241,
+  "ranking": 631354,
   "acceptanceRate": 80.4,
   "submissionCalendar": {
     "1768694400": 3,
@@ -187,5 +187,5 @@
     "1794960000": 1,
     "1795046400": 1
   },
-  "updatedAt": "2026-11-20T07:20:34+00:00"
+  "updatedAt": "2026-11-20T20:25:04+00:00"
 }
