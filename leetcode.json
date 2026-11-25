@@ -1,15 +1,15 @@
 {
   "username": "sravanikoshtu",
-  "totalSolved": 265,
+  "totalSolved": 266,
   "totalQuestions": 4124,
-  "easySolved": 84,
+  "easySolved": 85,
   "totalEasy": 978,
   "mediumSolved": 134,
   "totalMedium": 2152,
   "hardSolved": 47,
   "totalHard": 994,
   "ranking": 622811,
-  "acceptanceRate": 80.5,
+  "acceptanceRate": 80.6,
   "submissionCalendar": {
     "1768694400": 3,
     "1768780800": 1,
@@ -188,7 +188,8 @@
     "1795046400": 1,
     "1795219200": 1,
     "1795305600": 1,
-    "1795392000": 1
+    "1795392000": 1,
+    "1795478400": 1
   },
-  "updatedAt": "2026-11-24T22:29:13+00:00"
+  "updatedAt": "2026-11-25T08:40:22+00:00"
 }
